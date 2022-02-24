@@ -27,4 +27,19 @@ public class JwtProvider {
                 .compact();
         return token;
     }
+
+    public String getEmailByToken(String token){
+        try{
+            String subject = Jwts
+                    .parser()
+                    .setSigningKey(key)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+            return subject;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
 }
